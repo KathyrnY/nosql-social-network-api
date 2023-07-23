@@ -12,10 +12,20 @@ const reactionSchema = new Schema(
       required: true
     },
     createdAt: {
-      type: Date,
-      default: Date.now,
-    //    may need to add date formatter
-    }
+        type: Date,
+        default: Date.now,
+        get: function (createdAt) {
+          return createdAt.toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZoneName: 'short',
+          });
+        },
+      },
   },
   {
     toJSON: {
