@@ -1,8 +1,10 @@
-const { connect, connection } = require('mongoose');
+const mongoose = require('mongoose');
 
 const connectionString =
-  process.env.MONGODB_URI || 'mongodb://localhost/nosql-social-network-api';
+  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/socialnetworkDB';
 
-connect(connectionString);
+mongoose.connect(connectionString);
 
-module.exports = connection;
+const db = mongoose.connection;
+
+module.exports = db;

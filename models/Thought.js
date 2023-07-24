@@ -44,6 +44,6 @@ thoughtSchema.virtual('reactionCount').get(function () {
   });
 
 const Thought = model('thought', thoughtSchema);
-console.log(thought.createdAt); 
+// console.log(thought.createdAt); 
 
 module.exports = Thought;
