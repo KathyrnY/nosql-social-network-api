@@ -8,7 +8,8 @@ console.time("seeding");
 connection.once("open", async () => {
     console.log("DB is connected");
 
-    // need to add await for delete
+    await User.deleteMany({});
+    await Thought.deleteMany({});
 
     await User.collection.insertMany(seedData.users);
     await Thought.collection.insertMany(seedData.thoughts);
