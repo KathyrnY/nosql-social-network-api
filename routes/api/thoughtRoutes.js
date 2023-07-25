@@ -3,6 +3,7 @@ const {
   getAllThoughts,
   getSingleThought,
   createThought,
+  updateThought,
 } = require('../../controllers/thoughtController');
 
 router
@@ -12,6 +13,7 @@ router
 
   router
   .route('/:id')
-  .get(getSingleThought);
+  .get(getSingleThought)
+  .put(updateThought)
 
   module.exports = router;

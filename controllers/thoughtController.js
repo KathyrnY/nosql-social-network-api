@@ -46,13 +46,15 @@ module.exports = {
       // Create a thought
       async createThought(req, res) {
         try {
-          const thought = await Thought.create(body);
+          const thought = await Thought.create(req.body);
+          console.log('New thought created:', thought);
+      
           const userData = await User.findOneAndUpdate(
-            { _id: req.body.id },
+            { _id: req.body.userId },
             { $push: { thoughts: thought._id } },
             { new: true }
           );
-      
+  
           if (!userData) {
             return res.status(404).json({ message: 'No user found with this ID' });
           }
@@ -60,6 +62,26 @@ module.exports = {
           res.json(thought);
         } catch (err) {
           res.json(err);
+        }
+      },
+      
+     
+      async updateThought(req, res) {
+        try {
+          const thoughtData = await Thought.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: req.body },
+            { new: true, runValidators: true }
+          );
+    
+          if (!thoughtData) {
+            res.status(404).json({ message: 'No thought with this id!' });
+            return
+          }
+    
+          res.json(thoughtData);
+        } catch (err) {
+          res.status(500).json(err);
         }
       },
     
