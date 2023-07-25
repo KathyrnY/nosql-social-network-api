@@ -70,7 +70,42 @@ module.exports = {
         
         res.json(userData);
       } catch(err) {
-        res.status(400).json(err)
+        res.status(500).json(err)
       };
     },
-}
+
+    async addFriend(req, res) {
+        try {
+          const userData = await User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId } },
+            { new: true, runValidators: true }
+          );
+    
+          if (!userData) {
+            return res.status(404).json({ message: 'No user found with this id!' });
+          }
+    
+          res.json(userData);
+        } catch (err) {
+          res.status(500).json(err);
+        }
+      },
+
+      async deleteFriend(req, res) {
+      try {
+        const userData = await User.findOneAndUpdate(
+          { _id: req.params.userId },
+          { $pull: { friends: req.params.friendId } },
+          { new: true }
+        )
+
+        if (!userData) {
+            return res.status(404).json({ message: 'No user found with this id!' });
+          }
+          res.json(userData);
+        } catch (err) {
+          res.status(500).json(err);
+        }
+      },
+    };
