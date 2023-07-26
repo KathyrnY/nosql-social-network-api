@@ -99,5 +99,41 @@ module.exports = {
         }
       },
     
+      async addReaction(req, res) {
+        try {
+          const thoughtData = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body } },
+            { new: true, runValidators: true }
+          )
     
+          if (!thoughtData) {
+              res.status(404).json({ message: 'No reaction created!' });
+              return;
+          }
+    
+          res.json(thoughtData);
+        } catch(err) {
+          res.status(500).json(err);
+        };
+      },
+    
+      async deleteReaction(req, res) {
+        try {
+          const thoughtData = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { _id: req.params.reactionId } } },
+            { new: true }
+          )
+    
+          if (!thoughtData) {
+            res.status(404).json({ message: 'No reaction found with this id!' });
+            return;
+          }
+          
+          res.json(thoughtData);
+        } catch(err) {
+          res.status(500).json(err);
+        };
+      }
 };
