@@ -24,7 +24,7 @@ This API offers extensive functionality, granting users the ability to update or
 
   ## Visual
   
-
+https://github.com/KathyrnY/nosql-social-network-api/assets/127566404/742a94f2-aec7-4705-bb39-6386c550e913
 
   ## Installation
 
