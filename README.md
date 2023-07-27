@@ -35,6 +35,8 @@ https://github.com/KathyrnY/nosql-social-network-api/assets/127566404/742a94f2-a
   5) run npm run seed
   6) run npm run start
 
+https://github.com/KathyrnY/nosql-social-network-api/assets/127566404/759c0e57-59d5-48ce-92f8-1d981822e0b0
+
   ## Usage
   
   * Once you run npm start you can test each route for their corressponding functionality by making GET, POST, PUT and Delete Request to your localhost. Please refer to video on step to step visual. 
